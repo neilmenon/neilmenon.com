@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'Mohave';
+    src: url(../fonts/mohave-bold.otf) format('opentype');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v13/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+    unicode-range: U+0000-00FF;
+}
+@media only screen and (max-width: 600px) {#name {font-size: 11vw!important;}}
+html {margin: 0; padding: 0;}
+body {
+    background: url(../img/background.jpeg);
+    color: #eee;
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate3d(0, 0, 0);
+    perspective-origin: 50% 50%;
+    perspective: 1000px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000; 
+    animation: animation 150s linear infinite;
+    font-family: 'Lato', sans-serif;
+    
+}
+a {
+    color: #eee;
+    transition: all 0.5s linear;
+}
+a:hover {
+    color: unset;
+}
+h2 {
+    font-family: 'Mohave';
+}
+* {
+    box-sizing: border-box;
+}
+main {
+    position: absolute;
+    top: 10%;
+    text-align: center;
+    margin: auto;
+}
+@keyframes animation {
+    100%{
+     background-position:0px -3000px;
+   }
+ }
+#face {
+    max-width: 200px;
+    border-radius: 50%;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: all 0.5s linear;
+    opacity: 0.8;
+    margin: auto;
+    display: block;
+}
+#face:hover {
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    filter: grayscale(0%);
+    opacity: 1;
+}
+#name {
+    color: #fe634a;
+    font-size: 5em;
+    letter-spacing: 24px;
+    margin: 10px -25px 10px 0;
+    transition: all 0.5s linear;
+}
+#name:hover {
+    color: #577a9c;
+}
+#desc {
+    margin: auto;
+    font-size: 20px;
+}
+#socials {
+    cursor: default;
+    list-style: none;
+    margin-top: 0px;
+    margin: auto;
+    padding: 0px;
+}
+#socials li {
+    display: inline-block;
+    padding: 10px;
+    font-size: 30px;
+}
+#mail:hover {color: #ea4335}
+#github:hover {color: #c9510c;}
+#resume:hover {color: #7289da}
+#linkedin:hover {color: #0077b5}
+#instagram:hover {color: #e1306c}
+#spotify:hover {color: #1db954;}
+#socialsText {
+    display: block;
+    margin-top: -5px;
+}
