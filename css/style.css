@@ -2,6 +2,7 @@
     font-family: 'Mohave';
     src: url(../fonts/mohave-bold.otf) format('opentype');
 }
+
 @font-face {
     font-family: 'Lato';
     font-style: normal;
@@ -9,8 +10,21 @@
     src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v13/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
     unicode-range: U+0000-00FF;
 }
-@media only screen and (max-width: 600px) {#name {font-size: 11vw!important;}}
-html {margin: 0; padding: 0;}
+
+@media only screen and (max-width: 600px) {
+    #name {
+        font-size: 11vw!important;
+    }
+    #lastfm {
+        width: 67%!important;
+    }
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background: url(../img/background.jpeg);
     color: #eee;
@@ -22,40 +36,46 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translate3d(0, 0, 0);
     perspective-origin: 50% 50%;
     perspective: 1000px;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000; 
-    animation: animation 150s linear infinite;
+    -webkit-perspective: 1000;
+    /* transform: translate3d(0, 0, 0); */
+    /* backface-visibility: hidden; */
+    /* -webkit-backface-visibility: hidden; */
+    /* animation: animation 150s linear infinite; */
     font-family: 'Lato', sans-serif;
-    
 }
+
 a {
     color: #eee;
     transition: all 0.5s linear;
 }
+
 a:hover {
     color: unset;
 }
+
 h2 {
     font-family: 'Mohave';
 }
+
 * {
     box-sizing: border-box;
 }
+
 main {
     position: absolute;
     top: 10%;
     text-align: center;
     margin: auto;
 }
+
 @keyframes animation {
-    100%{
-     background-position:0px -3000px;
-   }
- }
+    100% {
+        background-position: 0px -3000px;
+    }
+}
+
 #face {
     max-width: 200px;
     border-radius: 50%;
@@ -67,12 +87,14 @@ main {
     margin: auto;
     display: block;
 }
+
 #face:hover {
     -webkit-filter: grayscale(0%);
     -moz-filter: grayscale(0%);
     filter: grayscale(0%);
     opacity: 1;
 }
+
 #name {
     color: #fe634a;
     font-size: 5em;
@@ -80,13 +102,16 @@ main {
     margin: 10px -25px 10px 0;
     transition: all 0.5s linear;
 }
+
 #name:hover {
     color: #577a9c;
 }
+
 #desc {
     margin: auto;
     font-size: 20px;
 }
+
 #socials {
     cursor: default;
     list-style: none;
@@ -94,18 +119,104 @@ main {
     margin: auto;
     padding: 0px;
 }
+
 #socials li {
     display: inline-block;
     padding: 10px;
     font-size: 30px;
 }
-#mail:hover {color: #ea4335}
-#github:hover {color: #c9510c;}
-#resume:hover {color: #7289da}
-#linkedin:hover {color: #0077b5}
-#instagram:hover {color: #e1306c}
-#spotify:hover {color: #1db954;}
+
+#mail:hover {
+    color: #ea4335
+}
+
+#github:hover {
+    color: #c9510c;
+}
+
+#resume:hover {
+    color: #7289da
+}
+
+#linkedin:hover {
+    color: #0077b5
+}
+
+#instagram:hover {
+    color: #e1306c
+}
+
+#spotify:hover {
+    color: #1db954;
+}
+
 #socialsText {
     display: block;
     margin-top: -5px;
+}
+
+.album:before {
+    content: url(/img/album.png);
+    display: inline-block;
+    margin-right: 2px;
+    position: relative;
+    top: 1px;
+    filter: brightness(0) invert(1);
+}
+
+.listening:before {
+    content: url(/img/listening.gif);
+    display: inline-block;
+    margin-right: 2px;
+    position: relative;
+    top: 1px;
+}
+
+#lastfm {
+    position: absolute;
+    overflow: hidden;
+    width: 40%;
+    margin: auto;
+    top: 125%;
+    left: 0;
+    right: 0;
+    border: 1px solid #eeeeee54;
+    padding: 11px;
+    border-radius: 4px;
+    padding-bottom: 24px;
+}
+
+.lastfm-details {
+    float: right;
+    text-align: right;
+    max-width: 63%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 17px;
+    margin-top: 8px;
+    padding-right: 1px;
+}
+
+.lastfm-image {
+    width: 53px;
+    height: 53px;
+}
+
+.lastfm-played {
+    position: absolute;
+    bottom: 2%;
+    display: block;
+    margin: auto;
+    right: 0;
+    left: 0;
+    font-size: 14px;
+}
+
+.lastfm-played>hr {
+    border-color: #eeeeee9e;
+    width: 64%;
+    margin: auto;
+    border-width: 0.5px;
 }
