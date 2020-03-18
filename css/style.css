@@ -16,11 +16,13 @@
         font-size: 11vw!important;
     }
 }
+
 @media only screen and (max-height: 800px) {
     #lastfm {
         bottom: 4%!important;
     }
 }
+
 @media only screen and (max-height: 570px) {
     #lastfm {
         bottom: 3%!important;
@@ -46,6 +48,7 @@ body {
     perspective-origin: 50% 50%;
     perspective: 1000px;
     -webkit-perspective: 1000;
+    /* background animation -- disabled due to CPU usage */
     /* transform: translate3d(0, 0, 0); */
     /* backface-visibility: hidden; */
     /* -webkit-backface-visibility: hidden; */
@@ -223,7 +226,7 @@ main {
     font-size: 14px;
 }
 
-.lastfm-played>hr {
+.lastfm-played > hr {
     border-color: #eeeeee9e;
     width: 64%;
     margin: auto;
