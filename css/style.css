@@ -15,8 +15,15 @@
     #name {
         font-size: 11vw!important;
     }
+}
+@media only screen and (max-height: 800px) {
     #lastfm {
-        width: 67%!important;
+        bottom: 4%!important;
+    }
+}
+@media only screen and (max-height: 570px) {
+    #lastfm {
+        bottom: 3%!important;
     }
 }
 
@@ -173,11 +180,13 @@ main {
 }
 
 #lastfm {
-    position: absolute;
+    position: fixed;
     overflow: hidden;
-    width: 40%;
+    width: 25%;
+    min-width: 300px;
+    max-width: 450px;
     margin: auto;
-    top: 125%;
+    bottom: 25%;
     left: 0;
     right: 0;
     border: 1px solid #eeeeee54;
@@ -195,7 +204,7 @@ main {
     text-overflow: ellipsis;
     font-size: 12px;
     line-height: 17px;
-    margin-top: 8px;
+    margin-top: 7px;
     padding-right: 1px;
 }
 
