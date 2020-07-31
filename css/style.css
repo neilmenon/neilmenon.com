@@ -232,3 +232,17 @@ main {
     margin: auto;
     border-width: 0.5px;
 }
+
+#blog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    letter-spacing: 5px;
+    margin: 8px 3px 0px 0px;
+    font-family: 'Mohave';
+}
+
+#blog:hover {
+    color: #bcd380;
+}

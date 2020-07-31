@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (typeof track.date !== "undefined") {
                 var played = "Played " + moment.unix(track.date.uts).fromNow()
             } else {
-                var played = "Listening now on Spotify"
+                var played = "Listening now"
                 scrobble = "listening"
             }
             track_html.push('<span style="float:left"> <a href="' + url + '" target="_blank"> <img title="View this track on Last.fm" src="' + image + '"> </a> </span> <div class="lastfm-details"> <span class="' + scrobble + '" title="Track: ' + title + '"><strong>' + title + '</strong></span> <br> <span title="Artist: ' + artist + '"> <i class="fa fa-user" aria-hidden="true"></i> ' + artist + '</span> <br> <span class="album" title="Album: ' + album + '">' + album + '</span><br> </div> <span class="lastfm-played"><hr>' + played + '</span>')
