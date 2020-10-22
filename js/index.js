@@ -1,8 +1,16 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+    updateListeningActivity();
+    window.setInterval(function(){
+        if (document.visibilityState == "visible") { // if the DOM is visible (currently on tab)
+            updateListeningActivity();
+        }
+    }, 10000);
+})
+
+function updateListeningActivity() {
     $.get('/lastfm.php', function(data) {
         var track_html = []
         var tracks = JSON.parse(data)
-        console.log(tracks)
         tracks.forEach(function(track, index) {
             var title = track.name
             var artist = track.artist['#text']
@@ -21,7 +29,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         })
         document.getElementById("lastfm").innerHTML = track_html[0]
     })
-})
+}
 
 let vh = window.innerHeight * 0.01
 document.body.style.setProperty('--vh', `${vh}px`)
