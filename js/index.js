@@ -25,7 +25,7 @@ function updateListeningActivity() {
                 var played = "Listening now"
                 scrobble = "listening"
             }
-            track_html.push('<span style="float:left"> <a href="' + url + '" target="_blank"> <img title="View this track on Last.fm" src="' + image + '"> </a> </span> <div class="lastfm-details"> <span class="' + scrobble + '" title="Track: ' + title + '"><strong>' + title + '</strong></span> <br> <span title="Artist: ' + artist + '"> <i class="fa fa-user" aria-hidden="true"></i> ' + artist + '</span> <br> <span class="album" title="Album: ' + album + '">' + album + '</span><br> </div> <span class="lastfm-played"><hr>' + played + '</span>')
+            track_html.push('<div style="height:77px"><span style="float:left"> <a href="' + url + '" target="_blank"> <img title="View this track on Last.fm" src="' + image + '"> </a> </span> <div class="lastfm-details"> <span class="' + scrobble + '" title="Track: ' + title + '"><strong>' + title + '</strong></span> <br> <span title="Artist: ' + artist + '"> <i class="fa fa-user" aria-hidden="true"></i> ' + artist + '</span> <br> <span class="album" title="Album: ' + album + '">' + album + '</span><br> </div></div> <div class="lastfm-played"><hr>' + played + '</div>')
         })
         document.getElementById("lastfm").innerHTML = track_html[0]
     })
@@ -95,6 +95,16 @@ $("#spotify a").hover(function() {
     $("#socialsText").stop()
     $("#socialsText").fadeTo(0, 0.001)
     $("#socialsText").text("Follow me on Spotify")
+    $("#socialsText").fadeTo(500, 1)
+}, function() {
+    $("#socialsText").stop()
+    $("#socialsText").fadeTo(0, 1)
+    $("#socialsText").fadeTo(500, 0.001)
+})
+$("#lastfm-icon a").hover(function() {
+    $("#socialsText").stop()
+    $("#socialsText").fadeTo(0, 0.001)
+    $("#socialsText").text("Follow me on Last.fm")
     $("#socialsText").fadeTo(500, 1)
 }, function() {
     $("#socialsText").stop()

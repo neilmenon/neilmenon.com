@@ -17,18 +17,6 @@
     }
 }
 
-@media only screen and (max-height: 800px) {
-    #lastfm {
-        bottom: 4%!important;
-    }
-}
-
-@media only screen and (max-height: 570px) {
-    #lastfm {
-        bottom: 3%!important;
-    }
-}
-
 html {
     margin: 0;
     padding: 0;
@@ -48,17 +36,13 @@ body {
     perspective-origin: 50% 50%;
     perspective: 1000px;
     -webkit-perspective: 1000;
-    /* background animation -- disabled due to CPU usage */
-    /* transform: translate3d(0, 0, 0); */
-    /* backface-visibility: hidden; */
-    /* -webkit-backface-visibility: hidden; */
-    /* animation: animation 150s linear infinite; */
     font-family: 'Lato', sans-serif;
 }
 
 a {
     color: #eee;
     transition: all 0.5s linear;
+    text-decoration: none;
 }
 
 a:hover {
@@ -78,12 +62,6 @@ main {
     top: 10%;
     text-align: center;
     margin: auto;
-}
-
-@keyframes animation {
-    100% {
-        background-position: 0px -3000px;
-    }
 }
 
 #face {
@@ -106,7 +84,7 @@ main {
 }
 
 #name {
-    color: #fe634a;
+    color: #577a9c;
     font-size: 5em;
     letter-spacing: 24px;
     margin: 10px -25px 10px 0;
@@ -114,7 +92,7 @@ main {
 }
 
 #name:hover {
-    color: #577a9c;
+    color: #fe634a;
 }
 
 #desc {
@@ -160,6 +138,10 @@ main {
     color: #1db954;
 }
 
+#lastfm-icon:hover {
+    color: #ba0000;
+}
+
 #socialsText {
     display: block;
     margin-top: -5px;
@@ -183,19 +165,17 @@ main {
 }
 
 #lastfm {
-    position: fixed;
-    overflow: hidden;
-    width: 25%;
-    min-width: 300px;
+    margin-top: 15px!important;
+    margin-bottom: 20px!important;
+    width: 50%;
+    min-width: 330px;
     max-width: 450px;
     margin: auto;
-    bottom: 25%;
-    left: 0;
-    right: 0;
+    height: 116px;
     border: 1px solid #eeeeee54;
     padding: 11px;
     border-radius: 4px;
-    padding-bottom: 24px;
+    padding-bottom: 7px;
 }
 
 .lastfm-details {
@@ -206,8 +186,8 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 12px;
-    line-height: 17px;
-    margin-top: 7px;
+    line-height: 20px;
+    margin-top: 3px;
     padding-right: 1px;
 }
 
@@ -217,18 +197,13 @@ main {
 }
 
 .lastfm-played {
-    position: absolute;
-    bottom: 2%;
-    display: block;
     margin: auto;
-    right: 0;
-    left: 0;
     font-size: 14px;
 }
 
 .lastfm-played > hr {
     border-color: #eeeeee9e;
-    width: 64%;
+    width: 90%;
     margin: auto;
     border-width: 0.5px;
 }
