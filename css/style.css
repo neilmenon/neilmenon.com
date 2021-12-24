@@ -164,11 +164,11 @@ main {
     top: 1px;
 }
 
-#lastfm {
-    margin-top: 15px!important;
-    margin-bottom: 20px!important;
+.media-box {
+    margin-top: 5px!important;
+    margin-bottom: 10px!important;
     width: 50%;
-    min-width: 330px;
+    min-width: 355px;
     max-width: 450px;
     margin: auto;
     height: 116px;
@@ -213,11 +213,43 @@ main {
     top: 0;
     right: 0;
     text-decoration: none;
-    letter-spacing: 5px;
-    margin: 8px 3px 0px 0px;
-    font-family: 'Mohave';
+    /* letter-spacing: 5px; */
+    margin: 4px 4px 0px 0px;
+    /* font-family: 'Mohave'; */
 }
 
 #blog:hover {
     color: #bcd380;
+}
+
+#blog i {
+    padding-left: 5px;
+}
+
+#media-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#media-container > div:not(:last-child) {
+    margin-right: 1rem;
+}
+@media screen and (max-width: 726px) {
+    #media-container > div:not(:last-child) {
+        margin-right: 0rem;
+    }
+}
+
+.movie-details {
+    float: right;
+    text-align: right;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 4px;
+    padding-right: 1px;
+    font-weight: bold;
 }
