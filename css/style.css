@@ -89,6 +89,7 @@ main {
     letter-spacing: 24px;
     margin: 10px -25px 10px 0;
     transition: all 0.5s linear;
+    max-width: 100%;
 }
 
 #name:hover {
@@ -168,7 +169,7 @@ main {
     margin-top: 5px!important;
     margin-bottom: 10px!important;
     width: 50%;
-    min-width: 355px;
+    min-width: 360px;
     max-width: 450px;
     margin: auto;
     height: 116px;
@@ -181,7 +182,7 @@ main {
 .lastfm-details {
     float: right;
     text-align: right;
-    max-width: 63%;
+    max-width: 73%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -213,9 +214,9 @@ main {
     top: 0;
     right: 0;
     text-decoration: none;
-    /* letter-spacing: 5px; */
-    margin: 4px 4px 0px 0px;
-    /* font-family: 'Mohave'; */
+    letter-spacing: 5px;
+    margin: 8px 3px 0px 0px;
+    font-family: 'Mohave';
 }
 
 #blog:hover {
@@ -243,7 +244,7 @@ main {
 .movie-details {
     float: right;
     text-align: right;
-    max-width: 75%;
+    max-width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -252,4 +253,8 @@ main {
     margin-top: 4px;
     padding-right: 1px;
     font-weight: bold;
+}
+
+span {
+    font-weight: normal;
 }
