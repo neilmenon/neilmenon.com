@@ -71,7 +71,7 @@ main {
     -moz-filter: grayscale(100%);
     filter: grayscale(100%);
     transition: all 0.5s linear;
-    opacity: 0.8;
+    opacity: 0.9;
     margin: auto;
     display: block;
 }
@@ -165,6 +165,12 @@ main {
     top: 1px;
 }
 
+.listening:after {
+    content: "\0000a0";
+    display: inline-block;
+    width: 1px;
+}
+
 .media-box {
     margin-top: 5px!important;
     margin-bottom: 10px!important;
@@ -177,6 +183,16 @@ main {
     padding: 11px;
     border-radius: 4px;
     padding-bottom: 7px;
+    background: #cbcbcb21;
+    transition: all 0.25s linear;
+}
+
+.media-box:hover {
+    background: #cbcbcb3d;
+}
+
+.media-header {
+    font-weight: 900;
 }
 
 .lastfm-details {

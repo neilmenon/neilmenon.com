@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     updateListeningActivity();
     getRecentlyWatched();
+    getLatestConcert();
     window.setInterval(function(){
         if (document.visibilityState == "visible") { // if the DOM is visible (currently on tab)
             updateListeningActivity();
@@ -36,10 +37,27 @@ function getRecentlyWatched() {
     $.get(`/imdb.json?t=${Date.now()}`, function(payload) {
         let data = JSON.parse(JSON.stringify(payload))
         let movie = data?.latest
+        let ratingStrings = []
+        for (let i = 0; i < 10; i++) {
+            ratingStrings.push(`${ i + 1 } - ${ getRatingDescriptor(i + 1) }`)
+        }
+        let ratingString = ratingStrings.join(", ")
         if (movie) {
-            $("#movie").html(`<span style="float: left;"> <a href="${movie.link}" target="_blank" title="${movie.description}"><img src="${movie.image_url}" style="max-height: 96px;"></a> </span> <div style="float: right;" class="movie-details"> <span style="font-weight: 900;" title="${movie.title}">${movie.title}</span><br> <span>${movie.year} • ${movie.rating} • ${movie.genres.join(", ")}</span><br> <span title="Director"><i class="fa fa-user" aria-hidden="true"></i> ${movie.director} • <span title="Votes: ${shortNumber(movie.votes.replaceAll(",", ""))}">IMDB: ${movie.imdb_rating}</span></span><br> <span title="Rated/watched on ${moment(movie.rated_on).format("MMMM Do, YYYY")}"><u>My Rating</u>: ${movie.my_rating} — "${getRatingDescriptor(movie.my_rating)}" • <i class="fas fa-clock"></i> ${moment(movie.rated_on).format("MMM Do")}</span><br></div>`)
+            $("#movie").html(`<span style="float: left;"> <a href="${movie.link}" target="_blank" title="${movie.description}"><img src="${movie.image_url}" style="max-height: 96px;"></a> </span> <div style="float: right;" class="movie-details"> <span style="font-weight: 900;" title="${movie.title}">${movie.title}</span><br> <span>${movie.year} • ${movie.rating} • ${movie.genres.join(", ")}</span><br> <span title="Director"><i class="fa fa-user" aria-hidden="true"></i> ${movie.director} • <span title="Votes: ${shortNumber(movie.votes.replaceAll(",", ""))}">IMDB: ${movie.imdb_rating}</span></span><br> <span title="${ratingString}"><u>My Rating</u>: ${movie.my_rating} — "${getRatingDescriptor(movie.my_rating)}" • <i class="fas fa-clock"></i> ${moment(movie.rated_on).format("MMM Do")}</span><br></div>`)
         } else {
             $("#movie").html()
+        }
+    })
+}
+
+function getLatestConcert() {
+    $.get(`/songkick.json?t=${Date.now()}`, function(payload) {
+        let data = JSON.parse(JSON.stringify(payload))
+        let concert = data
+        if (concert) {
+            $("#concert").html(`<span style="float: left;"> <a href="${concert.sk_link}" target="_blank" title="View on Songkick"><img src="${concert.artist_image}" style="max-height: 96px;"></a> </span> <div style="float: right;line-height: 21px; max-width: 68%" class="movie-details"> <span style="font-weight: 900;" title="${concert.headliner_artist}">${concert.headliner_artist}</span><br> <span>${concert.supporting_artist ? "w/ " + concert.supporting_artist : "<em>No Supporting Acts</em>"}</span><br> <span title="Venue"><i class="fas fa-map-marker-alt"></i> ${concert.venue}</span><br> <span title="${concert.timestamp}"><i class="fas fa-clock"></i> ${moment(concert.timestamp).format("dddd, MMMM Do, YYYY")}</span><br></div>`)
+        } else {
+            $("#concert").html()
         }
     })
 }
