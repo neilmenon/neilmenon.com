@@ -1,7 +1,27 @@
 window.addEventListener('DOMContentLoaded', () => {
+    moment.locale('en-short', {
+        relativeTime: {
+            future: 'in %s',
+            past: '%s',
+            s:  '%ds',
+            ss: '%ds',
+            m:  '1m',
+            mm: '%dm',
+            h:  '1h',
+            hh: '%dh',
+            d:  '1d',
+            dd: '%dd',
+            M:  '1mo',
+            MM: '%dmo',
+            y:  '1y',
+            yy: '%dY'
+        }
+    });
+
     updateListeningActivity();
     getRecentlyWatched();
     getLatestConcert();
+    getLatestCollectedCD();
     window.setInterval(function(){
         if (document.visibilityState == "visible") { // if the DOM is visible (currently on tab)
             updateListeningActivity();
@@ -23,24 +43,7 @@ function updateListeningActivity() {
         var played = ""
         var scrobble = ""
         if (typeof track.date !== "undefined") {
-            moment.locale('en-short', {
-                relativeTime: {
-                    future: 'in %s',
-                    past: '%s',
-                    s:  '%ds',
-                    ss: '%ds',
-                    m:  '1m',
-                    mm: '%dm',
-                    h:  '1h',
-                    hh: '%dh',
-                    d:  '1d',
-                    dd: '%dd',
-                    M:  '1mo',
-                    MM: '%dmo',
-                    y:  '1y',
-                    yy: '%dY'
-                }
-                });
+            
             var played = '<i class="fas fa-clock"></i> ' + moment.unix(track.date.uts).locale('en-short').fromNow() + ' • '
         } else {
             var played = ""
@@ -68,8 +71,9 @@ function getRecentlyWatched() {
             ratingStrings.push(`${ i + 1 } - ${ getRatingDescriptor(i + 1) }`)
         }
         let ratingString = ratingStrings.join(", ")
+        let starString = movie.stars.length > 2 ? [movie.stars[0], movie.stars[1]].join(", ") : movie.stars.join(", ")
         if (movie) {
-            $("#movie").html(`<span style="float: left;"> <a href="${movie.link}" target="_blank" title="${movie.description}"><img title="${movie.title} Poster" src="${movie.image_url}" width="64px" height="96px"></a> </span> <div style="float: right;" class="movie-details"> <span style="font-weight: 900;" title="${movie.title}">${movie.title}</span><br> <span>${movie.year} • ${movie.rating} • ${movie.genres.join(", ")}</span><br> <span title="Director"><i class="fa fa-user" aria-hidden="true"></i> ${movie.director} • <span title="Votes: ${shortNumber(movie.votes.replaceAll(",", ""))}">IMDB: ${movie.imdb_rating}</span></span><br> <span title="${ratingString}"><u>My Rating</u>: ${movie.my_rating} — "${getRatingDescriptor(movie.my_rating)}" • <i class="fas fa-clock"></i> ${moment(movie.rated_on).format("MMM Do")}</span><br></div>`)
+            $("#movie").html(`<span style="float: left;"> <a href="${movie.link}" target="_blank" title="${movie.description}"><img title="${movie.title} Poster" src="${movie.image_url}" width="64px" height="96px"></a> </span> <div style="float: right;" class="movie-details"> <span style="font-weight: 900;" title="${movie.title}">${movie.title}</span><br> <span>${movie.year} • ${movie.rating} • <span title="Number of ratings on IMDB"><i class="fas fa-vote-yea"></i> ${movie.votes}</span> • <span title="IMDB rating">IMDB: ${movie.imdb_rating}</span><br> <span title="Director"><i class="fa fa-user" aria-hidden="true"></i> ${movie.director}</span> • <span title="Stars: ${movie.stars.join(", ")}"><i class="fas fa-users"></i> ${starString}</span></span><br> <span title="${ratingString}"><u>My Rating</u>: ${movie.my_rating} — "${getRatingDescriptor(movie.my_rating)}" • <i class="fas fa-clock"></i> ${moment(movie.rated_on).format("MMM Do")}</span><br></div>`)
         } else {
             $("#movie").html()
         }
@@ -86,9 +90,21 @@ function getLatestConcert() {
             concert.headliner_artist = concert.headliner_artist.split(",")[0]
         }
         if (concert) {
-            $("#concert").html(`<span style="float: left;"> <a href="${concert.sk_link}" target="_blank" title="View on Songkick"><img title="${concert.headliner_artist} Image" src="${concert.artist_image}" width="96px" height="96px"></a> </span> <div style="float: right;line-height: 21px; max-width: 230px" class="movie-details"> <span style="font-weight: 900;" title="${concert.headliner_artist}">${concert.headliner_artist}</span><br> <span title="Supporting Artist">${concert.supporting_artist ? "w/ " + concert.supporting_artist : "N/A"}</span><br> <span title="Venue"><i class="fas fa-map-marker-alt"></i> ${concert.venue}</span><br> <span title="${concert.timestamp}"><i class="fas fa-clock"></i> ${moment(concert.timestamp).format("dddd, MMMM Do, YYYY")}</span><br></div>`)
+            $("#concert").html(`<span style="float: left;"> <a href="${concert.sk_link}" target="_blank" title="View on Songkick"><img title="${concert.headliner_artist} Image" src="${concert.artist_image}" width="96px" height="96px"></a> </span> <div style="float: right;line-height: 21px; max-width: 230px" class="movie-details"> <span style="font-weight: 900;" title="${concert.headliner_artist}">${concert.headliner_artist}</span><br> <span title="Supporting Artist: ${concert.supporting_artist}">${concert.supporting_artist ? "w/ " + concert.supporting_artist : "N/A"}</span><br> <span title="Venue"><i class="fas fa-map-marker-alt"></i> ${concert.venue}</span><br> <span title="${concert.timestamp}"><i class="fas fa-clock"></i> ${moment(concert.timestamp).format("dddd, MMMM Do, YYYY")}</span><br></div>`)
         } else {
             $("#concert").html()
+        }
+    })
+}
+
+function getLatestCollectedCD() {
+    $.get(`/discogs_collection.json?t=${Date.now()}`, function(payload) {
+        let collection = JSON.parse(JSON.stringify(payload))
+        let release = collection?.length ? collection[0] : null
+        if (release) {
+            $("#cd-collection").html(`<div> <div style="margin-right: 0.25rem;"><a href="${release.release_url}" target="_blank" title="View on Discogs"><img src="${release.image_url}" title="${release.release_title} Image" width="32px" height="32px"></a></div><div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${release.artist} - ${release.release_title} • ${release.year} • <span title="added to collection ${moment(release.date_added).locale('en-us').fromNow()}"><i class="fas fa-clock"></i> ${moment(release.date_added).locale('en-short').fromNow()}</span></div> </div>`)
+        } else {
+            $("#cd-collection").html()
         }
     })
 }
