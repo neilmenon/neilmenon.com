@@ -18,10 +18,10 @@ jobs:
         with:
           ruby-version: '2.7' # Not needed with a `.ruby-version` or `.tool-versions`
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - run: bundle exec rake
       - name: Build Jekyll site
         run: |
           cd blog
+          bundle exec rake
           bundle install
           jekyll build
 
