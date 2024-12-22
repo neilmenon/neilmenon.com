@@ -6,6 +6,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "jekyll"
 gem "bundler"
-gem "jekyll-seo-tag"
-gem "jekyll-sitemap"
-gem "jekyll-paginate"
+gem "github-pages"
+gem "webrick", "~> 1.7"
