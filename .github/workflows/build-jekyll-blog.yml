@@ -13,27 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Install Ruby and Dependencies
-      - name: Install Ruby and Jekyll
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ruby-full build-essential zlib1g-dev
-          echo 'export GEM_HOME="$HOME/.gem"' >> $GITHUB_ENV
-          echo 'export GEM_PATH="$HOME/.gem"' >> $GITHUB_ENV
-          echo 'export PATH="$HOME/.gem/bin:$PATH"' >> $GITHUB_ENV
-          source $GITHUB_ENV
-          # Force installation of gems to the user directory
-          gem install --user-install jekyll bundler
-
-      # Build the Jekyll site
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
       - name: Build Jekyll site
         run: |
-          source $GITHUB_ENV
           cd blog
+          bundle install
           jekyll build
 
       - name: Copy files to web server
