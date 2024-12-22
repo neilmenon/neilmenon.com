@@ -1,0 +1,48 @@
+name: CI for Jekyll Coding Blog
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'blog/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Ruby environment
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true # Caches Ruby gems
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          cd blog
+          bundle install
+
+      # Build the Jekyll site
+      - name: Build Jekyll site
+        run: |
+          cd blog
+          bundle exec jekyll build
+
+      - name: Copy files to web server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: root
+          key: ${{ secrets.KEY }}
+          port: 22
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "./blog/_site/*"
+          target: "/usr/share/nginx/html/blog/"
+          overwrite: true
+          strip_components: 2
