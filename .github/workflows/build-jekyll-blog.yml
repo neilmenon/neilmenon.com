@@ -21,7 +21,6 @@ jobs:
       - name: Build Jekyll site
         run: |
           cd blog
-          bundle exec rake
           bundle install
           jekyll build
 
