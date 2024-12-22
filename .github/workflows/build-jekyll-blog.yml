@@ -17,12 +17,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install Ruby and Jekyll
+     # Install Ruby and Dependencies
       - name: Install Ruby and Jekyll
         run: |
           sudo apt-get update
-          sudo apt-get install -y ruby-full build-essential
-          gem install jekyll
+          sudo apt-get install -y ruby-full build-essential zlib1g-dev
+          echo '# Install Ruby Gems to ~/.gem' >> ~/.bashrc
+          echo 'export GEM_HOME="$HOME/.gem"' >> ~/.bashrc
+          echo 'export PATH="$HOME/.gem/bin:$PATH"' >> ~/.bashrc
+          source ~/.bashrc
+          gem install jekyll bundler
 
       # Build the Jekyll site
       - name: Build Jekyll site
