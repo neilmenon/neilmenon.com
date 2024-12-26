@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths:
       - 'blog/**'
+      - '.github/workflows/build-jekyll-blog.yml'
 
   workflow_dispatch:
 
